@@ -27,6 +27,8 @@ class CreateUi(ttk.Frame):
             for x, char in enumerate(row):
                 button = ttk.Button(self, text=char)
                 button.grid(column=x, row=y, sticky=(tk.N, tk.S, tk.E, tk.W))
+                button.bind('<Button-1>', self.calc)
+
         self.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.E, tk.W))
 
         self.columnconfigure(0, weight=1)
@@ -43,8 +45,20 @@ class CreateUi(ttk.Frame):
         self.master.columnconfigure(0, weight=1)
         self.master.rowconfigure(0, weight=1)
 
+        self.display_var = tk.StringVar()
+        self.display_var.set('0')  
+
+        dispay_label = ttk.Label(self, textvariable=self.display_var)
+        dispay_label.grid(column=0, row=0, columnspan=4, sticky=(tk.N, tk.S, tk.E, tk.W))
+
+    def calc(self, event):
+          print(event.widget['text'])
+          char = event.widget['text']
+          self.display_var.set(char)
+
 root=tk.Tk()
 root.title("Minakami's calculator")
 CreateUi(root)
+
 
 root.mainloop()
