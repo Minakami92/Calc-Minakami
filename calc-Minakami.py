@@ -14,6 +14,7 @@ class CreateUi(ttk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.create_widgets()
+        self.exp_list = ['0']
 
     def create_widgets(self):
         dispay_label = ttk.Label(
