@@ -17,6 +17,8 @@ class CreateUi(ttk.Frame):
         self.exp_list = ['0']
 
     def create_widgets(self):
+        # self.expression_var = StringVar()
+        # self.expression_var.set('0')
         dispay_label = ttk.Label(
             self, text='0'
         )
@@ -53,9 +55,26 @@ class CreateUi(ttk.Frame):
         dispay_label.grid(column=0, row=0, columnspan=4, sticky=(tk.N, tk.S, tk.E, tk.W))
 
     def calc(self, event):
-          print(event.widget['text'])
+          #print(event.widget['text'])
           char = event.widget['text']
-          self.display_var.set(char)
+          #self.display_var.set(char)]
+          last = self.exp_list[-1]
+
+          print("char: "+char)
+
+          if char == '=':
+            if last in ('+', '-', '*', '/', '**', '//'): 
+                self.exp_list.pop()
+            exp = eval(''.join(self.exp_list))
+            self.exp_list = [str(exp)]
+            print("self.exp.list: "+str(self.exp_list))
+
+            self.exp_list = [list(self.exp_list)+[char]]
+            #elif char == "C":
+             #  self.exp_list = ["0"]
+          if char == "C":
+                self.display_var.set(["0"])
+          print("self.display_var.get()"+self.display_var.get())
 
 root=tk.Tk()
 root.title("Minakami's calculator")
